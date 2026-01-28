@@ -1,0 +1,69 @@
+def matematik_robotu_baslat():
+    print("Merhaba! Ben bir matematik bilgi robotuyum. Matematik hakkında ne bilmek istersiniz?")
+    print("Çıkmak için 'çıkış' yazabilirsiniz.")
+    print("Örnek sorular: 'pi nedir?', 'asal sayı nedir?', '2 artı 3 kaç yapar?'")
+
+    bilgi_bankasi = {
+        "pi nedir": "Pi (π) sayısı, bir dairenin çevresinin çapına oranıdır ve yaklaşık olarak 3.14159'dur. İrrasyonel bir sayıdır.",
+        "asal sayı nedir": "Asal sayılar, sadece 1'e ve kendisine bölünebilen 1'den büyük doğal sayılardır. Örnekler: 2, 3, 5, 7, 11.",
+        "dört işlem": "Matematikte dört temel işlem toplama, çıkarma, çarpma ve bölmedir.",
+        "toplama": "Toplama işlemi (+) iki veya daha fazla sayıyı bir araya getirerek toplamlarını bulmaktır. Örnek: 2 + 3 = 5.",
+        "çıkarma": "Çıkarma işlemi (-) bir sayıdan başka bir sayıyı eksiltmektir. Örnek: 5 - 2 = 3.",
+        "çarpma": "Çarpma işlemi (x veya *) tekrarlı toplamanın kısaltılmış halidir. Örnek: 2 x 3 = 6 (2'yi 3 kez toplamak).",
+        "bölme": "Bölme işlemi (/) bir sayıyı eşit parçalara ayırmaktır. Örnek: 6 / 3 = 2.",
+        "2 artı 3": "2 artı 3 eşittir 5.",
+        "5 eksi 2": "5 eksi 2 eşittir 3.",
+        "2 çarpı 3": "2 çarpı 3 eşittir 6.",
+        "6 bölü 2": "6 bölü 2 eşittir 3."
+    }
+
+    while True:
+        kullanici_sorusu = input("Sizin sorunuz: ").lower()
+
+        if kullanici_sorusu == "çıkış":
+            print("Güle güle! Tekrar görüşmek üzere.")
+            break
+
+        cevap_bulundu = False
+        for anahtar, cevap in bilgi_bankasi.items():
+            if anahtar in kullanici_sorusu:
+                print(f"Robot: {cevap}")
+                cevap_bulundu = True
+                break
+        
+        if not cevap_bulundu:
+            try:
+                if 'artı' in kullanici_sorusu or '+' in kullanici_sorusu:
+                    parts = kullanici_sorusu.replace('artı', '+').split('+')
+                    num1 = int(parts[0].strip())
+                    num2 = int(parts[1].strip())
+                    print(f"Robot: {num1} + {num2} = {num1 + num2}")
+                    cevap_bulundu = True
+                elif 'eksi' in kullanici_sorusu or '-' in kullanici_sorusu:
+                    parts = kullanici_sorusu.replace('eksi', '-').split('-')
+                    num1 = int(parts[0].strip())
+                    num2 = int(parts[1].strip())
+                    print(f"Robot: {num1} - {num2} = {num1 - num2}")
+                    cevap_bulundu = True
+                elif 'çarpı' in kullanici_sorusu or '*' in kullanici_sorusu:
+                    parts = kullanici_sorusu.replace('çarpı', '*').split('*')
+                    num1 = int(parts[0].strip())
+                    num2 = int(parts[1].strip())
+                    print(f"Robot: {num1} * {num2} = {num1 * num2}")
+                    cevap_bulundu = True
+                elif 'bölü' in kullanici_sorusu or '/' in kullanici_sorusu:
+                    parts = kullanici_sorusu.replace('bölü', '/').split('/')
+                    num1 = int(parts[0].strip())
+                    num2 = int(parts[1].strip())
+                    if num2 == 0:
+                        print("Robot: Sıfıra bölme yapılamaz.")
+                    else:
+                        print(f"Robot: {num1} / {num2} = {num1 / num2}")
+                    cevap_bulundu = True
+            except (ValueError, IndexError):
+                pass
+
+        if not cevap_bulundu:
+            print("Robot: Üzgünüm, bu konuda bilgim yok veya işlemi yapamıyorum. Başka bir şey sormak ister misiniz?")
+
+matematik_robotu_baslat()
